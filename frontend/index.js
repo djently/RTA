@@ -1,8 +1,6 @@
 import angular from 'angular';
 
-import './components/profile';
+let ngModule = angular.module('RTA', ['ngMaterial']);
 
-let ngModule = angular.module('RTA', [
-    'ngMaterial',
-    'RTA.profile'
-]);
+import Profile from './components/profile';
+Profile(ngModule);

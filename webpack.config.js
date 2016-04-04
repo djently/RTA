@@ -28,12 +28,8 @@ const common = {
             },
             {
                 test: /\.js$/,
-                loader: 'babel',
-                include: PATHS.app,
-                query: {
-                    cacheDirectory: '.cache',
-                    presets: ['es2015']
-                }
+                loaders: ['ng-annotate', 'babel?cacheDirectory=.cache'],
+                include: PATHS.app
             },
             {
                 test: /\.html$/,
@@ -59,7 +55,6 @@ if (TARGET === 'start' || !TARGET) {
         devServer: {
             contentBase: PATHS.build,
             historyApiFallback: true,
-            hot: true,
             inline: true,
             progress: true,
             stats: 'errors-only',
@@ -67,7 +62,6 @@ if (TARGET === 'start' || !TARGET) {
             port: process.env.PORT
         },
         plugins: [
-            new webpack.HotModuleReplacementPlugin(),
             new NpmInstallPlugin({
                 save: true
             })
@@ -77,5 +71,20 @@ if (TARGET === 'start' || !TARGET) {
 }
 
 if (TARGET === 'build') {
-    module.exports = merge(common, {});
+    module.exports = merge(common, {
+        devtool: 'cheap-module-source-map',
+        plugins: [
+            new webpack.optimize.UglifyJsPlugin({
+                    compress: {
+                        warnings: false
+                    }
+                }),
+            new webpack.optimize.DedupePlugin(),
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'NODE_ENV': JSON.stringify('production')
+                }
+            })
+        ]
+    });
 }
