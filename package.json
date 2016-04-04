@@ -1,0 +1,32 @@
+{
+  "name": "RTA",
+  "version": "1.0.0",
+  "description": "Real-Time Auction",
+  "main": "app.js",
+  "scripts": {
+    "start": "webpack-dev-server --content-base public"
+  },
+  "keywords": [],
+  "author": "Stanislav Kovalev",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.7.4",
+    "npm-install-webpack-plugin": "^3.0.0",
+    "webpack": "^1.12.14",
+    "webpack-dev-server": "^1.14.1",
+    "webpack-merge": "^0.8.4"
+  },
+  "dependencies": {
+    "angular": "^1.5.3",
+    "angular-animate": "^1.5.3",
+    "angular-aria": "^1.5.3",
+    "angular-material": "^1.0.7",
+    "angular-messages": "^1.5.3",
+    "babel-loader": "^6.2.4",
+    "components": "^0.1.0",
+    "css-loader": "^0.23.1",
+    "raw-loader": "^0.5.1",
+    "style-loader": "^0.13.1"
+  }
+}
