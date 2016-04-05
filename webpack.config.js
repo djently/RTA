@@ -15,7 +15,10 @@ const common = {
             'angular-material',
             'angular-material/angular-material.css',
         ],
-        app: PATHS.app
+        app: [
+            PATHS.app,
+            'webpack-hot-middleware/client?reload=true'
+        ]
     },
     resolve: {
         extensions: ['', '.js']
