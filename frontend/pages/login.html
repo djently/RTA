@@ -1,0 +1,26 @@
+<div ng-cloak style="height: 100%">
+    <md-content class="md-padding" layout="row" layout-align="center center">
+        <md-card flex flex-gt-xs="50" flex-gt-md="30">
+            <md-card-title>
+              <md-card-title-text>
+                <span class="md-headline">Login to RTA</span>
+              </md-card-title-text>
+            </md-card-title>
+            <md-card-content>
+                <md-input-container class="md-block" >
+                    <label>Login</label>
+                    <input
+                        ng-model="LoginCtrl.user.login"
+                        required
+                    >
+                </md-input-container>
+                <md-button 
+                    class="md-raised md-primary"
+                    ng-click="LoginCtrl.login()"
+                >
+                    Login
+                </md-button>
+            </md-card-content>
+        </md-card>
+    </md-content>
+</div>

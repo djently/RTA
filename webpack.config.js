@@ -35,14 +35,17 @@ const common = {
                 test: /\.html$/,
                 loader: 'raw'
             }
-        ]
+        ],
+        noParse: ['ws']
     },
+    externals: ['ws'],
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({
             name: 'vendors',
             filename: 'vendors.bundle.js',
             chunks: ['vendors']
-        })
+        }),
+        new webpack.optimize.OccurenceOrderPlugin()
     ],
     output: {
         path: PATHS.build,
@@ -59,12 +62,15 @@ if (TARGET === 'start' || !TARGET) {
             progress: true,
             stats: 'errors-only',
             host: process.env.HOST,
-            port: process.env.PORT
+            port: process.env.PORT,
+            hot: true
         },
         plugins: [
             new NpmInstallPlugin({
                 save: true
-            })
+            }),
+           new webpack.HotModuleReplacementPlugin(),
+           new webpack.NoErrorsPlugin()
         ],
         devtool: 'eval-source-map'
     });

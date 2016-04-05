@@ -1,6 +1,6 @@
-export default function rtaProfileModule(ngModule) {
-    return ngModule
-        .component('rtaProfile', {
-            template: require('./profile.html')
-        });
-}
+import angular from 'angular';
+
+export default angular.module('rtaProfile', [])
+    .component('rtaProfile', {
+        template: require('./profile.html')
+    });
