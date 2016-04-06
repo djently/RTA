@@ -1,3 +1,5 @@
+'use strict';
+
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
@@ -17,15 +19,13 @@ app.use(require('webpack-hot-middleware')(compiler));
 
 /* app code */
 
+const port = process.env.PORT || 3000;
+
 app.use(express.static('public'));
 
-server.listen(3000, function() {
-  console.log('Example app listening on port 3000!');
+server.listen(port, function() {
+  console.log('RTA is listening on port ' + port);
 });
 
-io.on('connection', function(socket) {
-    socket.emit('news', {hello: 'world'});
-    socket.on('my other event', function(data) {
-        console.log(data);
-    });
-});
+/* Sockets handler */
+const sockets = require('./backend/sockets')(io);

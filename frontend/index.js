@@ -9,6 +9,7 @@ import 'angular-ui-router';
 import './components/profile';
 
 /* Main module */
+import router from './router';
 
 angular.module('RTA',
     [
@@ -17,28 +18,14 @@ angular.module('RTA',
         'rtaProfile'
     ]
 )
-.config(function($stateProvider, $urlRouterProvider) {
-    $stateProvider
-        .state('main', {
-            url: '/',
-            template: require('./pages/main.html')
-        })
-        .state('login', {
-            url: '/login',
-            template: require('./pages/login.html'),
-            controller: 'LoginController',
-            controllerAs: 'LoginCtrl'
-        })
-        .state('404', {
-            url: '/404',
-            template: require('./pages/404.html')
-        })
-        ;
+.config(router)
+.run(function($state, $rootScope) {
+    $state.go('app.main');
 
-    $urlRouterProvider.otherwise('/404');
-})
-.run(function($state) {
-    $state.go('login');
+    $rootScope.$on('LOGGED_IN', function() {
+        console.log('LOGGED_IN');
+        $state.go('app.main');
+    });
 });
 
 /* Controllers */
