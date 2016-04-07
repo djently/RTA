@@ -18,7 +18,7 @@ class LoginService {
         this.$rootScope.$emit('LOGGED_IN', user);
     }
 
-    loggedOut() {
+    logout() {
         delete this.user;
     }
 

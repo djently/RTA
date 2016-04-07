@@ -1,7 +1,5 @@
 class LoginController {
     constructor(LoginService) {
-        this.user = {};
-
         this.LoginService = LoginService;
     }
 

@@ -9,26 +9,19 @@ import 'angular-ui-router';
 import './components/profile';
 
 /* Main module */
-import router from './router';
+import Router from './router';
 
-angular.module('RTA',
+const ngModule = angular.module('RTA',
     [
         'ngMaterial',
         'ui.router',
         'rtaProfile'
     ]
-)
-.config(router)
-.run(function($state, $rootScope) {
-    $state.go('app.main');
-
-    $rootScope.$on('LOGGED_IN', function() {
-        console.log('LOGGED_IN');
-        $state.go('app.main');
-    });
-});
+);
+Router(ngModule);
 
 /* Controllers */
+import AppController from './controllers/AppController';
 import LoginController from './controllers/LoginController';
 
 /* Services */
@@ -38,5 +31,6 @@ import LoginService from './services/LoginService';
 angular.module('RTA')
     .service('LoginService', LoginService)
     .service('SocketService', SocketService)
+    .controller('AppController', AppController)
     .controller('LoginController', LoginController)
     ;
