@@ -3,6 +3,8 @@ import config from '../config';
 
 const socketEvents = {
     login: 'rta.login',
+    logout: 'rta.logout',
+    disconnected: 'rta.disconnected',
     loggedIn: 'rta.loggedIn'
 };
 

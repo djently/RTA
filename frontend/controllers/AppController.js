@@ -1,13 +1,20 @@
 class AppController {
-    constructor($state, LoginService, SocketService) {
-        SocketService.on('rta.disconnect', function() {
+    constructor($state, $rootScope, LoginService, SocketService) {
+        SocketService.on(SocketService.events.disconnected, function() {
             LoginService.logout();
-            $state.go('login');
             alert('You have been disconnected!');
+        });
+
+        SocketService.on(SocketService.events.logout, function() {
+            $state.go('login');
+        });
+
+        $rootScope.$on('LOGGED_OUT', function() {
+            $state.go('login');
         });
     }
 }
 
-AppController.$inject = ['$state', 'LoginService', 'SocketService'];
+AppController.$inject = ['$state', '$rootScope', 'LoginService', 'SocketService'];
 
 export default AppController;

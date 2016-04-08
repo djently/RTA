@@ -4,9 +4,11 @@ require('./styles/global.css');
 /* Vendor modules */
 import angular from 'angular';
 import 'angular-ui-router';
+import 'ngstorage';
 
 /* App modules */
 import './components/profile';
+import './components/inventory';
 
 /* Main module */
 import Router from './router';
@@ -15,7 +17,11 @@ const ngModule = angular.module('RTA',
     [
         'ngMaterial',
         'ui.router',
-        'rtaProfile'
+        'ngStorage',
+
+        // App components
+        'rtaProfile',
+        'rtaInventory'
     ]
 );
 Router(ngModule);

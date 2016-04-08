@@ -1,7 +1,12 @@
 class LoginService {
-    constructor($rootScope, SocketService) {
+    constructor($rootScope, $sessionStorage, SocketService) {
         this.$rootScope = $rootScope;
         this.SocketService = SocketService;
+        this.$storage = $sessionStorage;
+
+        if (this.$storage.user && this.$storage.user.login) {
+            this.login(this.$storage.user.login);
+        }
 
         this.SocketService.on(
             SocketService.events.loggedIn,
@@ -14,11 +19,15 @@ class LoginService {
     }
 
     loggedIn(user) {
+        this.$storage.user = user;
         this.user = user;
         this.$rootScope.$emit('LOGGED_IN', user);
     }
 
     logout() {
+        this.SocketService.emit(this.SocketService.events.logout, this.user);
+        this.$rootScope.$emit('LOGGED_OUT', this.user);
+        delete this.$storage.user;
         delete this.user;
     }
 
@@ -27,5 +36,5 @@ class LoginService {
     }
  }
 
-LoginService.$inject = ['$rootScope', 'SocketService'];
+LoginService.$inject = ['$rootScope', '$sessionStorage', 'SocketService'];
 export default LoginService;

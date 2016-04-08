@@ -13,6 +13,11 @@ module.exports = {
                 allowNull: false,
                 type: Sequelize.STRING,
             },
+            title: Sequelize.STRING,
+            cash: {
+                allowNull: false,
+                type: Sequelize.INTEGER
+            },
             createdAt: {
                 allowNull: false,
                 type: Sequelize.DATE

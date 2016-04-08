@@ -7,7 +7,10 @@
               </md-card-title-text>
             </md-card-title>
             <md-card-content>
-                <md-input-container class="md-block" >
+                <md-input-container
+                    class="md-block"
+                    ng-keypress="LoginCtrl.keypressLogin($event)"
+                >
                     <label>Login</label>
                     <input
                         ng-model="LoginCtrl.user.login"
@@ -15,7 +18,7 @@
                     >
                 </md-input-container>
                 <md-button 
-                    class="md-raised md-primary"
+                    class="md-block md-raised md-primary"
                     ng-click="LoginCtrl.login()"
                 >
                     Login
