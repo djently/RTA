@@ -11,8 +11,7 @@ body
     width: 100%;
 }
 
-md-content.md-default-theme,
-md-content
+.rta-main-content
 {
     height: 100%;
 

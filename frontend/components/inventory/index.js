@@ -1,14 +1,16 @@
 require('./inventory-style.css');
 import angular from 'angular';
 
-export default angular.module('rtaInventory', [])
+import InventoryController from './InventoryController';
+import StartAuctionDialogController from './StartAuctionDialogController';
+
+const rtaInventoryModule = angular.module('rtaInventory', [])
+    .controller('InventoryController', InventoryController)
+    .controller('StartAuctionDialogController', StartAuctionDialogController)
     .component('rtaInventory', {
         template: require('./inventory.html'),
-        controller: function(LoginService) {
-            var self = this;
-
-            self.user = LoginService.getUser();
-            self.items = self.user.Items || [];
-        },
+        controller: 'InventoryController',
         controllerAs: 'InventoryCtrl'
     });
+
+export default rtaInventoryModule;

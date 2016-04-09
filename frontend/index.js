@@ -13,6 +13,7 @@ import './components/inventory';
 import './components/auction';
 
 /* Main module */
+import Constants from './constants';
 import Router from './router';
 
 const ngModule = angular.module('RTA',
@@ -29,6 +30,7 @@ const ngModule = angular.module('RTA',
     ]
 );
 
+Constants(ngModule);
 Router(ngModule);
 
 /* Controllers */

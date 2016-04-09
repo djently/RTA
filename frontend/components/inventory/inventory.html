@@ -21,9 +21,8 @@
                 ></ng-pluralize>
             </md-subheader>
             <md-list-item
-                class="md-3-line" 
-                ng-repeat="item in InventoryCtrl.items" 
-                ng-click="null"
+                class="md-2-line" 
+                ng-repeat="item in InventoryCtrl.items"
             >
                 <img 
                 ng-src="/img/{{item.name}}.svg" 
@@ -46,6 +45,18 @@
                         ></ng-pluralize>
                     </h4>
                 </div>
+
+                <md-icon 
+                    class="md-secondary" 
+                    ng-click="InventoryCtrl.startAuction(item, $event)" 
+                    aria-label="Start auction"
+                >
+                    <md-tooltip md-direction="left">
+                        Start auction
+                    </md-tooltip>
+                    <ng-md-icon icon="gavel"></ng-md-icon>
+                </md-icon> 
+
             </md-list-item>
         </md-list>
     </md-card-content>

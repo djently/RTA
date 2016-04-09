@@ -9,12 +9,12 @@
 
     <md-card-content>
         <h3 class="md-title" style="margin-bottom: 4px">
-            <b>Name</b>: {{ profileCtrl.user.login }}
+            Name: <b>{{ profileCtrl.user.login }}</b>
         </h3>
         <h4 class="md-subheader">
             {{ profileCtrl.user.title }}
         </h4>
-        <h3 class="md-title"><b>Cash:</b>
+        <h3 class="md-title">Cash:
         <ng-pluralize 
             count="profileCtrl.user.cash"
             when='{

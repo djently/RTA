@@ -1,0 +1,59 @@
+<md-dialog aria-label="Create new auction" flex="30">
+    <md-dialog-content>
+        <div class="md-dialog-content">
+            <h2 class="md-title">Create new auction</h2>
+            <h2 class="md-subhead">
+                Choose items quantity to place items to auction
+            </h2>
+            
+            <md-content>
+                <form 
+                    name="auctionForm"
+                    layout="column" layout-align="center center" layout-padding>
+                    <img
+                        class="rta-dialog-item"
+                        ng-src="/img/{{Dialog.item.name}}.svg" 
+                        alt="{{Dialog.item.name}}" 
+                        flex
+                    />
+
+                    <div class="md-subhead" ng-bind="::Dialog.item.name" flex></div>
+
+                    <md-input-container class="rta-dialog-input">
+                        <label>Quantity</label>
+                        <input 
+                            type="number" 
+                            ng-min="1"
+                            ng-max="{{::Dialog.item.quantity}}"
+                            ng-model="Dialog.itemAmount"
+                            name="itemQuantity"
+                        >
+
+                        <div
+                            ng-messages="auctionForm.itemQuantity.$error"
+                            role="alert"
+                            ng-messages-multiple
+                            ng-show="auctionForm.$invalid"
+                        >
+                            <div ng-message-exp="['min', 'max']">
+                                Items quantity should be at least 1 and not 
+                                exceed in stock quantity
+                            </div>
+                        </div>
+                    </md-input-container>
+                </form>
+            </md-content>
+        </div>
+    </md-dialog-content>
+    <md-dialog-actions layout="row">
+        <span flex></span>
+        <md-button ng-click="Dialog.onCancel()">Cancel</md-button>
+        <md-button
+            class="md-primary"
+            ng-click="Dialog.onStartAuction()"
+            ng-disabled="auctionForm.$invalid"
+        >
+            Start auction
+        </md-button>
+    </md-dialog-actions>
+</md-dialog>

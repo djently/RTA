@@ -1,0 +1,10 @@
+.rta-dialog-item {
+    width: 120px;
+    height: auto;
+}
+
+.rta-dialog-input {
+    width: 100%;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
