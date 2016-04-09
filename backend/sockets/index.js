@@ -3,12 +3,18 @@ var io, clients = {};
 
 function onLogin(socket, login) {
     console.info('Logging in user ' + login);
-    models.User.findOrCreate({
-        where: {
-            login: login
+    models.User.findOrCreate(
+        {
+            where: {
+                login: login
+            },
+            include: [models.Item]
         }
+    )
+    .spread(function(user, newUser) {
+        return newUser ? user.reload() : user;
     })
-    .spread(function(user, isNewUser) {
+    .then(function(user) {
         var socketId = clients[user.get('id')];
 
         if (socketId && io.sockets.connected[socketId]) {

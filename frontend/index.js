@@ -1,5 +1,6 @@
 /* Styles */
 require('./styles/global.css');
+require('./styles/rta.css');
 
 /* Vendor modules */
 import angular from 'angular';
@@ -9,6 +10,7 @@ import 'ngstorage';
 /* App modules */
 import './components/profile';
 import './components/inventory';
+import './components/auction';
 
 /* Main module */
 import Router from './router';
@@ -16,14 +18,17 @@ import Router from './router';
 const ngModule = angular.module('RTA',
     [
         'ngMaterial',
+        'ngMdIcons',
         'ui.router',
         'ngStorage',
 
         // App components
         'rtaProfile',
-        'rtaInventory'
+        'rtaInventory',
+        'rtaAuction',
     ]
 );
+
 Router(ngModule);
 
 /* Controllers */

@@ -14,6 +14,7 @@ const common = {
         vendors: [
             'angular-material',
             'angular-material/angular-material.css',
+            'angular-material-icons'
         ],
         app: [
             PATHS.app,

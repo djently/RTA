@@ -14,7 +14,16 @@
         <h4 class="md-subheader">
             {{ profileCtrl.user.title }}
         </h4>
-        <h3 class="md-title"><b>Cash:</b> {{ profileCtrl.user.cash }} coins</h3>
+        <h3 class="md-title"><b>Cash:</b>
+        <ng-pluralize 
+            count="profileCtrl.user.cash"
+            when='{
+                0: "{} coins",
+                1: "{} coin",
+                "other": "{} coins"
+            }'
+        ></ng-pluralize>
+        </h3>
     </md-card-content>
 
     <md-card-actions
@@ -26,6 +35,10 @@
             class="md-block md-raised md-warn"
             ng-click="profileCtrl.logout()"
         >
+            <md-icon>
+                <ng-md-icon icon="logout"></ng-md-icon>   
+            </md-icon>
+
             Logout
         </md-button>
     </md-card-actions>
