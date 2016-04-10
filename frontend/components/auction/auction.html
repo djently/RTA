@@ -8,6 +8,36 @@
     </md-toolbar>
 
     <md-card-content>
-        <i>No auction at the moment.</i>
+        <i ng-hide="AuctionCtrl.currentAuction">
+            No auction at the moment.
+        </i>
+        <div layout="column" layout-padding layout-align="center center"
+            ng-show="AuctionCtrl.currentAuction"
+        > 
+            <img 
+                ng-src="/img/{{AuctionCtrl.currentAuction.lot.itemName}}.svg" 
+                alt="{{AuctionCtrl.currentAuction.lot.itemName}}"
+                class="rta-item-auction"
+            />
+            <header class="md-title" 
+                ng-bind="AuctionCtrl.currentAuction.lot.itemName"></header>
+
+            <p>
+                Current bid: 
+                <b ng-bind="AuctionCtrl.currentAuction.winningBid"></b>
+                <ng-pluralize 
+                    count="AuctionCtrl.currentAuction.winningBid"
+                    when='{
+                        0: "{} coins",
+                        1: "{} coin",
+                        "other": "{} coins"
+                    }'
+                ></ng-pluralize>
+            </p>
+            
+            <p ng-if="AuctionCtrl.userId === AuctionCtrl.currentAuction.ownerId">
+                <i>This is your lot!</i>
+            </p>
+        </div>
     </md-card-content>
 </md-card>

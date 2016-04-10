@@ -1,25 +1,12 @@
+require('./auction-style.css');
 import angular from 'angular';
 
+import AuctionController from './AuctionController';
+
 export default angular.module('rtaAuction', [])
+    .controller('AuctionController', AuctionController)
     .component('rtaAuction', {
         template: require('./auction.html'),
-        controller: function() {
-            var self = this;
-
-            self.items = [
-                {
-                    name: 'Bread',
-                    quantity: 30
-                },
-                {
-                    name: 'Carrot',
-                    quantity: 18
-                },
-                {
-                    name: 'Diamond',
-                    quantity: 1
-                }
-            ];
-        },
-        controllerAs: 'InventoryCtrl'
+        controller: 'AuctionController',
+        controllerAs: 'AuctionCtrl'
     });

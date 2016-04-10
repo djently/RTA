@@ -1,9 +1,9 @@
-<md-dialog aria-label="Create new auction" flex="30">
+<md-dialog aria-label="Create new auction" flex="30" ng-cloak>
     <md-dialog-content>
         <div class="md-dialog-content">
             <h2 class="md-title">Create new auction</h2>
             <h2 class="md-subhead">
-                Choose items quantity to place items to auction
+                Choose items quantity to place them to auction
             </h2>
             
             <md-content>
@@ -20,7 +20,7 @@
                     <div class="md-subhead" ng-bind="::Dialog.item.name" flex></div>
 
                     <md-input-container class="rta-dialog-input">
-                        <label>Quantity</label>
+                        <label>Amount</label>
                         <input 
                             type="number" 
                             ng-min="1"
@@ -32,12 +32,31 @@
                         <div
                             ng-messages="auctionForm.itemQuantity.$error"
                             role="alert"
-                            ng-messages-multiple
-                            ng-show="auctionForm.$invalid"
+                            ng-show="auctionForm.minBid.$invalid"
                         >
                             <div ng-message-exp="['min', 'max']">
-                                Items quantity should be at least 1 and not 
+                                Items amount should be at least 1 and not 
                                 exceed in stock quantity
+                            </div>
+                        </div>
+                    </md-input-container>
+                    <md-input-container class="rta-dialog-input">
+                        <label>Minimum bid</label>
+                        <input 
+                            type="number" 
+                            ng-min="1"
+                            step="10"
+                            ng-model="Dialog.minBid"
+                            name="itemQuantity"
+                        >
+
+                        <div
+                            ng-messages="auctionForm.minBid.$error"
+                            role="alert"
+                            ng-show="auctionForm.minBid.$invalid"
+                        >
+                            <div ng-message-exp="'min'">
+                                Minimum bid should be positive number
                             </div>
                         </div>
                     </md-input-container>

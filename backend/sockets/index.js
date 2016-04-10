@@ -1,43 +1,22 @@
-const models = require('../models/');
-var io, clients = {};
+const Auction = require('../class/Auction');
 
-function onLogin(socket, login) {
-    console.info('Logging in user ' + login);
-    models.User.findOrCreate(
-        {
-            where: {
-                login: login
-            },
-            include: [models.Item]
-        }
-    )
-    .spread(function(user, newUser) {
-        return newUser ? user.reload() : user;
-    })
-    .then(function(user) {
-        var socketId = clients[user.get('id')];
+/* Event handlers */
+const onStartAuction = require('./onStartAuction');
+const onLogin = require('./onLogin');
 
-        if (socketId && io.sockets.connected[socketId]) {
-            io.sockets.connected[socketId]
-                .emit('rta.disconnect', user.login)
-                .leave('logged-users');
-        }
+const auctionHandlers = require('./auctionHandlers');
 
-        clients[user.get('id')] = socket.id;
+module.exports = function(io) {
+    io.on('connection', function connectionHandler(socket) {
+        var clients = {};
+        socket.emit('connected', 'Welcome to RTA server!');
 
-        socket
-            .emit('rta.loggedIn', user)
-            .join('logged-users');
+        socket.on('rta.login', onLogin.bind(null, io, socket));
+        socket.on('rta.startAuction', onStartAuction.bind(null, socket));
+        socket.on('rta.getAuctionState', function() {
+            return socket.emit('rta.pushAuctionState', Auction.state());
+        });
+
+        auctionHandlers(io, clients);
     });
-}
-
-function connectionHandler(socket) {
-    socket.emit('connected', 'Welcome to RTA server!');
-
-    socket.on('rta.login', onLogin.bind(null, socket));
-}
-
-module.exports = function(_io_) {
-    io = _io_;
-    io.on('connection', connectionHandler);
 };

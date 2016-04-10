@@ -17,6 +17,14 @@ class LoginService {
             SocketService.events.loggedIn,
             this.loggedIn.bind(this)
         );
+
+        SocketService.on(
+            SocketService.events.updateUser,
+            (user) => {
+                this.user = user;
+                $rootScope.$emit(EVENTS.USER_UPDATE, user);
+            }
+        );
     }
 
     login(login) {

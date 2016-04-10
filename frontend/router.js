@@ -48,7 +48,6 @@ export default function Router(ngModule) {
         $state.go('app.main');
 
         $rootScope.$on('LOGGED_IN', function() {
-            console.log('LOGGED_IN');
             $state.go('app.main');
         });
     });

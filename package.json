@@ -33,6 +33,7 @@
     "components": "^0.1.0",
     "css-loader": "^0.23.1",
     "express": "^4.13.4",
+    "lodash": "^4.9.0",
     "mysql": "^2.10.2",
     "ngstorage": "^0.3.10",
     "raw-loader": "^0.5.1",

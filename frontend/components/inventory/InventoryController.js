@@ -1,7 +1,7 @@
 var _private = {};
 
 class InventoryController {
-    constructor($rootScope, $mdDialog, LoginService, EVENTS) {
+    constructor($rootScope, $scope, $mdDialog, LoginService, EVENTS) {
         var self = this;
 
         _private.$mdDialog = $mdDialog;
@@ -12,7 +12,10 @@ class InventoryController {
         }
 
         loadUserData(LoginService.getUser());
-        $rootScope.$on(EVENTS.USER_UPDATE, loadUserData);
+        $rootScope.$on(EVENTS.USER_UPDATE, (e, user) => {
+            loadUserData(user);
+            $scope.$digest();
+        });
     }
 
     startAuction(item, $event) {
@@ -20,7 +23,7 @@ class InventoryController {
             targetEvent: $event,
             template: require('./start-auction-dialog.html'),
             locals: {
-                item: item
+                user: this.user, item
             },
             bindToController: true,
             controllerAs: 'Dialog',
@@ -32,6 +35,7 @@ class InventoryController {
 
 InventoryController.$inject = [
     '$rootScope',
+    '$scope',
     '$mdDialog',
     'LoginService',
     'EVENTS'
