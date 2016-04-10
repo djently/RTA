@@ -3,7 +3,7 @@ import angular from 'angular';
 export default angular.module('rtaProfile', [])
     .component('rtaProfile', {
         template: require('./profile.html'),
-        controller: function($rootScope, LoginService, EVENTS) {
+        controller: function($rootScope, $scope, LoginService, EVENTS) {
             var self = this;
 
             function loadUserData(user) {

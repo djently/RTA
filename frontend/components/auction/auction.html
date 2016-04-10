@@ -21,23 +21,48 @@
             />
             <header class="md-title" 
                 ng-bind="AuctionCtrl.currentAuction.lot.itemName"></header>
-
+            <header class="md-subtitle">
+                Amount: {{ AuctionCtrl.currentAuction.lot.itemAmount }}
+            </header>
             <p>
                 Current bid: 
                 <b ng-bind="AuctionCtrl.currentAuction.winningBid"></b>
                 <ng-pluralize 
                     count="AuctionCtrl.currentAuction.winningBid"
                     when='{
-                        0: "{} coins",
-                        1: "{} coin",
-                        "other": "{} coins"
+                        0: "coins",
+                        1: "coin",
+                        "other": "coins"
                     }'
                 ></ng-pluralize>
             </p>
-            
-            <p ng-if="AuctionCtrl.userId === AuctionCtrl.currentAuction.ownerId">
-                <i>This is your lot!</i>
+
+            <p>
+                Time left:
+                <b 
+                    ng-bind="AuctionCtrl.currentAuction.timeLeft | timeLeft"></b>
             </p>
+
+            <form layout="column">
+                <md-input-container class="rta-auction-bid" flex="100">
+                    <label>Your bid:</label>
+                    <input 
+                        type="number" 
+                        ng-min="{{AuctionCtrl.currentAuction.winningBid}}"
+                        step="10"
+                        ng-model="AuctionCtrl.bid"
+                        name="newBid"
+                    >
+                </md-input-container>
+
+                <md-button 
+                    class="md-raised md-accent rta-auction-bid-btn" 
+                    flex="100"
+                    ng-click="AuctionCtrl.placeBid()"
+                >
+                    Place bid
+                </md-button>
+            </form>
         </div>
     </md-card-content>
 </md-card>

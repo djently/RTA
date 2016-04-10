@@ -11,7 +11,8 @@ const socketEvents = {
 
     auctionStarted: 'rta.auctionStarted',
     auctionEnded: 'rta.auctionEnded',
-    pushAuctionState: 'rta.pushAuctionState'
+    pushAuctionState: 'rta.pushAuctionState',
+    placeBid: 'rta.placeBid'
 };
 
 class SocketService {

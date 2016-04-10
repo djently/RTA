@@ -1,5 +1,7 @@
-const models = require('../models/');
 const _ = require('lodash');
+
+const models = require('../models/');
+const Auction = require('../class/Auction');
 
 module.exports = function onLogin(io, socket, login) {
     console.info('Logging in user ' + login);
@@ -29,5 +31,9 @@ module.exports = function onLogin(io, socket, login) {
         socket
             .emit('rta.loggedIn', user)
             .join('logged-users');
+
+        socket.on('rta.placeBid', function(bid) {
+            Auction.placeBid(user, bid);
+        });
     });
 };

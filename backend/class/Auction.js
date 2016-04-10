@@ -1,6 +1,6 @@
 var _ = require('lodash');
 
-const AUCTION_TIME = 90000,
+const AUCTION_TIME = 10000,
       BID_ADDITIONAL_TIME = 10000;
       AUCTION_TICKER = 100;
 
@@ -39,9 +39,10 @@ function Auction() {
         }
         if (bid > currentAuction.winningBid) {
             _.assign(currentAuction, {
-                winnnerId: user.id,
+                winnerId: user.id,
                 winningBid: bid,
-                timeLeft: currentAuction.timeLeft + BID_ADDITIONAL_TIME
+                startTime: currentAuction.startTime + BID_ADDITIONAL_TIME,
+                timeLeft: getTimeLeft()
             });
 
             eventHandlers.onPlaceBid(currentAuction);

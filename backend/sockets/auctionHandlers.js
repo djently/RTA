@@ -27,12 +27,16 @@ module.exports = function(io) {
     });
 
     Auction.onAuctionEnded(function(auction) {
+        console.log(auction);
         models.User.findById(auction.winnerId, {
-            include: [
-                {model: models.Item}
-            ]
+            include: [models.Item]
         }).then(function(user) {
-            var payout = auction.winnerId === auction.ownerId ? 0 : auction.winningBid;
+            var payout, hasBids;
+            hasBids = auction.winnerId === auction.ownerId &&
+                auction.winningBid !== auction.lot.minBid;
+
+            payout = hasBids ? auction.winningBid : 0;
+
             Sequelize.Promise.all([
                 updateUserItems(
                     user,
