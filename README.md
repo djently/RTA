@@ -7,4 +7,4 @@ To launch app do following steps
 + $ npm run migrate
 + $ npm start
 
-after that application will be avialable on 127.0.0.1:3000
+after that application will be available on 127.0.0.1:3000
